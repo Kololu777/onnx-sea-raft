@@ -1,0 +1,16 @@
+{
+    "name": "Python 3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "runArgs": [
+q        "--gpus=all",
+        "--shm-size=4gb",
+    ],
+    "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+	],
+    "postCreateCommand": "pip install -r ${containerWorkspaceFolder}/install/requirements-gpu.txt"
+}
