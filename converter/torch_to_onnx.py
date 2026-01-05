@@ -42,7 +42,8 @@ def load_model(args):
         model = RAFT(args)
         load_ckpt(model, args.path)
     else:
-        model = RAFTWrapper.from_pretrained(args.url, args=args).eval()
+        model = RAFTWrapper.from_pretrained(args.url, args=args)
+    model.eval()
     model.set_forward_args(args.iters, True)
     return model
 
@@ -105,6 +106,7 @@ if __name__ == "__main__":
         opset_version=args.opset,
         input_names=["image1", "image2"],
         output_names=["flow_final", "info_final"],
+        dynamo=False,
     )
 
     if args.check_numerical:
